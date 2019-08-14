@@ -21,7 +21,7 @@ class ContainerDemo extends StatelessWidget {
               ),
               Container(
                 color: Colors.green,
-                padding: EdgeInsets.only(left: 50, top: 30, right: 50, bottom: 30),
+                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                 child: Container(
                   color: Colors.yellow,
                   child: Text('중첩 컨네이너'),
