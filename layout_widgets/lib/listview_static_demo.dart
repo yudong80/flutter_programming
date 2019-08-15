@@ -4,7 +4,7 @@ void main() => runApp(ListViewStaticDemo());
 
 class ListViewStaticDemo extends StatelessWidget {
   static const String _title = "정적 ListView 위젯 데모";
-  static const List<String> planets = [
+  static const List<String> _data = [
     'Mercury',
     'Venus',
     'Earth',
@@ -18,10 +18,10 @@ class ListViewStaticDemo extends StatelessWidget {
 
   Widget _buildStaticListView() {
     return ListView.builder(
-      itemCount: planets.length,
+      itemCount: _data.length,
       itemBuilder: (BuildContext _context, int i) {
         return ListTile(
-          title: Text(planets[i],
+          title: Text(_data[i],
               style: TextStyle(
                 fontSize: 23,
               )),
