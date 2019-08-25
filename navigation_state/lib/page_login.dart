@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'dart:io';
 
+import 'state_login_demo.dart';
+import 'state_simple.dart';
+
 class LoginPage extends StatelessWidget {
+
+  void _onLogin(BuildContext context) {
+    final SimpleState state = Provider.of<SimpleState>(context);
+    state.setEmail("email>>>>");
+
+    Navigator.pushNamed(context, MAIN_PAGE);
+  }
+
+  void _onCancel() =>  exit(0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: Container(
           padding: EdgeInsets.fromLTRB(20, 120, 20, 120),
           child:Column(
@@ -40,12 +55,12 @@ class LoginPage extends StatelessWidget {
                 children: <Widget>[
                   RaisedButton(
                     child: Text('Log In'),
-                    onPressed: () { } ,
+                    onPressed: () => _onLogin(context) ,
                   ),
                   SizedBox(width: 10.0),
                   RaisedButton(
                     child: Text('Cancel'),
-                    onPressed: () { exit(0); } ,
+                    onPressed: _onCancel ,
                   ),
                 ],
               ),
@@ -55,3 +70,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+

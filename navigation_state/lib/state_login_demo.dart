@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
-import 'page_login.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(StateLoginDemo());
+import 'page_login.dart';
+import 'page_main.dart';
+import 'state_simple.dart';
+
+void main() => runApp(
+    ChangeNotifierProvider(
+      builder: (context) => SimpleState(),
+      child: StateLoginDemo(),
+    ));
+
+const String ROOT_PAGE = '/';
+const String MAIN_PAGE = '/main';
 
 class StateLoginDemo extends StatelessWidget {
 
@@ -10,7 +21,11 @@ class StateLoginDemo extends StatelessWidget {
     return MaterialApp(
       title: '로그인 폼',
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      initialRoute: ROOT_PAGE,
+      routes: {
+        ROOT_PAGE : (context) => LoginPage(),
+        MAIN_PAGE: (context) => MainPage(),
+      },
     );
   }
 }
