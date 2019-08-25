@@ -6,16 +6,26 @@ import 'dart:io';
 import 'state_login_demo.dart';
 import 'state_simple.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State createState() => LoginPageState();
+}
+
+class LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController =
+      TextEditingController(text: 'your_name@gmail.com');
+  final TextEditingController _passwordController =
+      TextEditingController(text: 'input password');
 
   void _onLogin(BuildContext context) {
+    final String email = _emailController.text;
     final SimpleState state = Provider.of<SimpleState>(context);
-    state.setEmail("email>>>>");
+    state.setEmail(email);
 
     Navigator.pushNamed(context, MAIN_PAGE);
   }
 
-  void _onCancel() =>  exit(0);
+  void _onCancel() => exit(0);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +33,7 @@ class LoginPage extends StatelessWidget {
         resizeToAvoidBottomPadding: false,
         body: Container(
           padding: EdgeInsets.fromLTRB(20, 120, 20, 120),
-          child:Column(
+          child: Column(
             children: <Widget>[
               Hero(
                   tag: 'heoro',
@@ -31,23 +41,18 @@ class LoginPage extends StatelessWidget {
                     child: Image.asset('assets/logo.jpg'),
                     backgroundColor: Colors.transparent,
                     radius: 58.0, //unit: logical pixel?
-                  )
-              ),
+                  )),
               SizedBox(height: 45.0),
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
-                initialValue: 'your_name@gmail.com',
-                decoration: InputDecoration(
-                    border: OutlineInputBorder()
-                ),
+                decoration: InputDecoration(border: OutlineInputBorder()),
+                controller: _emailController,
               ),
               SizedBox(height: 15.0),
               TextFormField(
-                initialValue: 'input password',
                 obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder()
-                ),
+                decoration: InputDecoration(border: OutlineInputBorder()),
+                controller: _passwordController,
               ),
               SizedBox(height: 10.0),
               Row(
@@ -55,19 +60,17 @@ class LoginPage extends StatelessWidget {
                 children: <Widget>[
                   RaisedButton(
                     child: Text('Log In'),
-                    onPressed: () => _onLogin(context) ,
+                    onPressed: () => _onLogin(context),
                   ),
                   SizedBox(width: 10.0),
                   RaisedButton(
                     child: Text('Cancel'),
-                    onPressed: _onCancel ,
+                    onPressed: _onCancel,
                   ),
                 ],
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 }
-
