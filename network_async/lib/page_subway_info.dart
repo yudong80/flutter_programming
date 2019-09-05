@@ -21,22 +21,29 @@ class SubwayArrival {
   String _subwayHeading;
   String _arvlMsg2;
 
-  SubwayArrival(this._rowNum, this._subwayId, this._trainLineNm, this._subwayHeading, this._arvlMsg2);
+  SubwayArrival(this._rowNum, this._subwayId, this._trainLineNm,
+      this._subwayHeading, this._arvlMsg2);
 
   int get rowNum => _rowNum;
+
   String get subwayId => _subwayId;
+
   String get trainLineNm => _trainLineNm;
+
   String get subwayHeading => _subwayHeading;
+
   String get arvlMsg2 => _arvlMsg2;
 }
 
 class MainPageState extends State<MainPage> {
-  TextEditingController _stationController = TextEditingController(text: _defaultStation);
+  TextEditingController _stationController =
+      TextEditingController(text: _defaultStation);
   String _text1 = 'hello';
   String _text2 = 'hello';
 
   void _onClick() async {
-    var response = await http.get(_buildUrl(_defaultStation));
+    String station = _stationController.text;
+    var response = await http.get(_buildUrl(station));
     String responseBody = response.body;
     print('res >> $responseBody');
 
@@ -55,16 +62,16 @@ class MainPageState extends State<MainPage> {
     List<dynamic> realtimeArrivalList = json['realtimeArrivalList'];
     final int cnt = realtimeArrivalList.length;
 
-    List<SubwayArrival> list = List.generate(cnt,
-            (int i) {
-          Map<String, dynamic> item = realtimeArrivalList[i];
-          return SubwayArrival(
-            item['rowNum'],
-            item['subwayId'],
-            item['trainLineNm'],
-            item['subwayHeading'],
-            item['arvlMsg2'],);
-        });
+    List<SubwayArrival> list = List.generate(cnt, (int i) {
+      Map<String, dynamic> item = realtimeArrivalList[i];
+      return SubwayArrival(
+        item['rowNum'],
+        item['subwayId'],
+        item['trainLineNm'],
+        item['subwayHeading'],
+        item['arvlMsg2'],
+      );
+    });
 
     SubwayArrival res = list[0];
     setState(() {
@@ -76,6 +83,7 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text('지하철 실시간 정보'),
       ),
@@ -107,13 +115,17 @@ class MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Row(
             children: <Widget>[
               Text('     도착 정보'),
             ],
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Card(
             child: Container(
               padding: EdgeInsets.all(70),
