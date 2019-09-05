@@ -126,21 +126,36 @@ class MainPageState extends State<MainPage> {
           SizedBox(
             height: 10,
           ),
-          Card(
-            child: Container(
-              padding: EdgeInsets.all(70),
-              child: Column(
-                children: <Widget>[
-                  AspectRatio(
-                    aspectRatio: 15.0 / 5.0,
-                    child: Image.asset('images/subway.png'),
-                  ),
-                  Text(_text1),
-                  Text(_text2),
-                ],
+          Row(
+            children: <Widget>[
+              Card(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 60,
+                      height: 60,
+                      child: Image.asset('images/subway.png'),
+                    ),
+                    Text(_text1),
+                    Text(_text2),
+                  ],
+                ),
               ),
-            ),
-          )
+              Card(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: 60,
+                      height: 60,
+                      child: Image.asset('images/subway.png'),
+                    ),
+                    Text(_text1),
+                    Text(_text2),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
