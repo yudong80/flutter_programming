@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-const String _urlPrefix = 'http://swopenapi.seoul.go.kr/api/subway/';
-const String _userKey = 'sample';
-const String _urlSuffix = '/json/realtimeStationArrival/0/5/';
-const String _defaultStation = '광화문';
+import 'model/subway_arrival.dart';
+import 'api/subway_api.dart' as api;
 
 const int STATUS_OK = 200;
 
@@ -14,36 +11,15 @@ class MainPage extends StatefulWidget {
   State createState() => MainPageState();
 }
 
-class SubwayArrival {
-  int _rowNum;
-  String _subwayId;
-  String _trainLineNm;
-  String _subwayHeading;
-  String _arvlMsg2;
-
-  SubwayArrival(this._rowNum, this._subwayId, this._trainLineNm,
-      this._subwayHeading, this._arvlMsg2);
-
-  int get rowNum => _rowNum;
-
-  String get subwayId => _subwayId;
-
-  String get trainLineNm => _trainLineNm;
-
-  String get subwayHeading => _subwayHeading;
-
-  String get arvlMsg2 => _arvlMsg2;
-}
-
 class MainPageState extends State<MainPage> {
   TextEditingController _stationController =
-      TextEditingController(text: _defaultStation);
+      TextEditingController(text: api.defaultStation);
   String _text1 = 'hello';
   String _text2 = 'hello';
 
   void _onClick() async {
     String station = _stationController.text;
-    var response = await http.get(_buildUrl(station));
+    var response = await http.get(api.buildUrl(station));
     String responseBody = response.body;
     print('res >> $responseBody');
 
@@ -162,11 +138,4 @@ class MainPageState extends State<MainPage> {
   }
 }
 
-String _buildUrl(String station) {
-  StringBuffer sb = StringBuffer();
-  sb.write(_urlPrefix);
-  sb.write(_userKey);
-  sb.write(_urlSuffix);
-  sb.write(station);
-  return sb.toString();
-}
+
