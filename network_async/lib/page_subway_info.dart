@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'model/subway_arrival.dart';
 import 'api/subway_api.dart' as api;
 
-const int STATUS_OK = 200;
 
 class MainPage extends StatefulWidget {
   @override
@@ -14,8 +13,35 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   TextEditingController _stationController =
       TextEditingController(text: api.defaultStation);
-  String _text1 = 'hello';
-  String _text2 = 'hello';
+  List<SubwayArrival> _data = [];
+
+  List<Card> _buildCards() {
+    print('>>> _data.length? ${_data.length}');
+
+    if (_data.length == 0) {
+      return <Card>[];
+    }
+
+    List<Card> res = [];
+    for (SubwayArrival info in _data) {
+      Card card = Card(
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: 60,
+              height: 60,
+              child: Image.asset('images/subway.png'),
+            ),
+            Text(info.trainLineNm),
+            Text(info.arvlMsg2),
+          ],
+        ),
+      );
+      res.add(card);
+    }
+
+    return res;
+  }
 
   void _onClick() async {
     String station = _stationController.text;
@@ -26,11 +52,11 @@ class MainPageState extends State<MainPage> {
     var json = jsonDecode(responseBody);
     Map<String, dynamic> errorMessage = json['errorMessage'];
 
-    if (errorMessage['status'] != STATUS_OK) {
+    if (errorMessage['status'] != api.STATUS_OK) {
       setState(() {
         final String errMessage = errorMessage['message'];
-        _text1 = 'error';
-        _text2 = errMessage;
+        print('error >> $errMessage');
+        _data = const [];
       });
       return;
     }
@@ -49,10 +75,8 @@ class MainPageState extends State<MainPage> {
       );
     });
 
-    SubwayArrival res = list[0];
     setState(() {
-      _text1 = res.trainLineNm;
-      _text2 = res.arvlMsg2;
+      _data = list;
     });
   }
 
@@ -102,40 +126,14 @@ class MainPageState extends State<MainPage> {
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: <Widget>[
-              Card(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 60,
-                      height: 60,
-                      child: Image.asset('images/subway.png'),
-                    ),
-                    Text(_text1),
-                    Text(_text2),
-                  ],
-                ),
-              ),
-              Card(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: 60,
-                      height: 60,
-                      child: Image.asset('images/subway.png'),
-                    ),
-                    Text(_text1),
-                    Text(_text2),
-                  ],
-                ),
-              ),
-            ],
+          Flexible(
+            child: GridView.count(
+              crossAxisCount: 2,
+              children: _buildCards(),
+            ),
           ),
         ],
       ),
     );
   }
 }
-
-
