@@ -57,7 +57,7 @@ public class MainActivity extends FlutterActivity {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, location -> {
                     if (location != null) {
-                        String res = "(" + location.getLongitude() + ", " + location.getLatitude() + ")";
+                        String res = "(" + location.getLatitude() + ", " + location.getLongitude() + ")";
                         Log.d(TAG, "location? " + res);
                         result.success(res);
                     }
