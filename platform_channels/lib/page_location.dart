@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(BatteryPage());
+void main() => runApp(LocationPage());
 
-class BatteryPage extends StatefulWidget {
+class LocationPage extends StatefulWidget {
   @override
-  State createState() => BatteryPageState();
+  State createState() => LocationPageState();
 }
 
-class BatteryPageState extends State<BatteryPage> {
+class LocationPageState extends State<LocationPage> {
   String _text = 'current location is unknown';
 
   static const String METHOD_CURRENT_LOCATION = "getCurrentLocation";
@@ -36,9 +36,9 @@ class BatteryPageState extends State<BatteryPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Current Location',
+      title: 'Location Channel',
       home: Scaffold(
-        appBar: AppBar(title: Text('Location')),
+        appBar: AppBar(title: Text('Location Channel')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

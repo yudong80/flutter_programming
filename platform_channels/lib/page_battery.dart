@@ -29,7 +29,7 @@ class BatteryPageState extends State<BatteryPage> {
     }
 
     setState(() {
-      _text = 'battery level is $_newText';
+      _text = _newText;
     });
   }
 
@@ -38,7 +38,7 @@ class BatteryPageState extends State<BatteryPage> {
     return MaterialApp(
       title: 'Battery level',
       home: Scaffold(
-        appBar: AppBar(title: Text('Battery Level')),
+        appBar: AppBar(title: Text('Battery Channel')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
