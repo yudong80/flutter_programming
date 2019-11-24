@@ -2,20 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:navigation_state/login_form_demo.dart';
-import 'package:navigation_state/page_login.dart';
 
 void main() {
-  testWidgets('테스트', (WidgetTester tester) async {
-
-  });
-
   testWidgets("로그인 폼 테스트", (WidgetTester tester) async {
-    //1. 로그인 페이지 실행
-    await tester.pumpWidget(StateLoginDemo());
+    Key emailKey = Key('email');
+    Key passwordKey = Key('password');
 
-    await tester.enterText(find.widgetWithText(TextFormField, 'your_name@gmail.com'), 'teslar@gmail.com');
+    const emailInput = 'tesla@gmail.com';
 
-//    await tester.tap(find.widgetWithText(RaisedButton, 'Log In'));
+    //1. 로그인 폼을 실행
+    await tester.pumpWidget(loginFormApp);
+    expect(find.byKey(emailKey), findsOneWidget);
+    expect(find.byKey(passwordKey), findsOneWidget);
+    expect(find.widgetWithText(RaisedButton, 'Log In'), findsOneWidget);
 
+    //2. 이메일 입력
+    await tester.enterText(find.byKey(emailKey), emailInput);
+
+    //3. 로그인 버튼 누르기
+    await tester.tap(find.widgetWithText(RaisedButton, 'Log In'));
+    await tester.pumpAndSettle();
+
+    //4. 결과 확인
+    expect(find.text('로그인 완료:  ${emailInput}'), findsOneWidget);
   });
 }
+

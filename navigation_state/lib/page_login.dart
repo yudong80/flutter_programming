@@ -44,12 +44,14 @@ class LoginPageState extends State<LoginPage> {
                   )),
               SizedBox(height: 45.0),
               TextFormField(
+                key: Key('email'),
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(border: OutlineInputBorder()),
                 controller: _emailController,
               ),
               SizedBox(height: 15.0),
               TextFormField(
+                key: Key('password'),
                 obscureText: true,
                 decoration: InputDecoration(border: OutlineInputBorder()),
                 controller: _passwordController,
