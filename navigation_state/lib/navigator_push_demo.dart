@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(NavigatorBasicDemo());
+void main() => runApp(NavigatorPushDemo());
 
-class NavigatorBasicDemo extends StatelessWidget {
-  static const String _title = 'Navigator 기본 데모';
-
+class NavigatorPushDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
       debugShowCheckedModeBanner: false,
-      home: MainPage(_title),
+      home: MainPage(),
     );
   }
 }
 
 class MainPage extends StatelessWidget {
-  final String _title;
-
-  MainPage(this._title);
+   _showNextPage(BuildContext context) => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => NextPage()));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: Text('Navigator 기본 데모'),
       ),
       body: Center(
         child: RaisedButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SecondPage()));
-          },
+          onPressed: () => _showNextPage(context),
           child: Text('다음 화면으로 이동'),
         ),
       ),
@@ -39,18 +32,18 @@ class MainPage extends StatelessWidget {
   }
 }
 
-class SecondPage extends StatelessWidget {
+class NextPage extends StatelessWidget {
+  _backToMainPage(BuildContext context) => Navigator.pop(context);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('두번째 페이지'),
+        title: Text('다음 페이지'),
       ),
       body: Center(
         child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => _backToMainPage(context),
           child: Text('돌아가기'),
         ),
       ),
