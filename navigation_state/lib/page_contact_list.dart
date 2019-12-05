@@ -3,20 +3,12 @@ import 'package:contacts_service/contacts_service.dart';
 import 'page_contact_detail.dart';
 
 class ContactListPage extends StatefulWidget {
-  ContactListPage(this._title);
-
-  final String _title;
-
   @override
-  _ContactListPageState createState() => _ContactListPageState(_title);
+  _ContactListPageState createState() => _ContactListPageState();
 }
 
 class _ContactListPageState extends State<ContactListPage> {
   Iterable<Contact> _contacts;
-
-  _ContactListPageState(this._title);
-
-  final String _title;
 
   @override
   void initState() {
@@ -26,7 +18,7 @@ class _ContactListPageState extends State<ContactListPage> {
 
   refreshContacts() async {
     Iterable<Contact> contacts =
-    await ContactsService.getContacts(withThumbnails: false);
+        await ContactsService.getContacts(withThumbnails: false);
     setState(() {
       _contacts = contacts;
     });
@@ -35,12 +27,12 @@ class _ContactListPageState extends State<ContactListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(_title)),
+        appBar: AppBar(title: Text('주소록 데모')),
         body: _contacts != null
             ? ListView.builder(
-          itemCount: _contacts.length,
-          itemBuilder: _buildRow,
-        )
+                itemCount: _contacts.length,
+                itemBuilder: _buildRow,
+              )
             : Center(child: CircularProgressIndicator()));
   }
 
@@ -51,10 +43,8 @@ class _ContactListPageState extends State<ContactListPage> {
           ? CircleAvatar(backgroundImage: MemoryImage(c.avatar))
           : CircleAvatar(child: Text(c.initials())),
       title: Text(c.displayName ?? ""),
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => ContactDetailPage(c)));
-      },
+      onTap: () => Navigator.pushNamed(context, ContactDetailPage.routeName,
+          arguments: c),
     );
   }
 }
