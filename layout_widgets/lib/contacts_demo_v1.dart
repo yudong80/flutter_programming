@@ -4,7 +4,7 @@ import 'package:contacts_service/contacts_service.dart';
 void main() => runApp(ListViewDynamicApp());
 
 class ListViewDynamicApp extends StatelessWidget {
-  static const String _title = "동적 ListView 위젯 데모";
+  static const String _title = "주소록 데모 V1";
 
   @override
   Widget build(BuildContext context) {
