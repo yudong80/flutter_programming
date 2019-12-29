@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'page_contact_list.dart';
 import 'page_contact_detail.dart';
 
-void main() => runApp(ContactsDemoV2());
+void main() => runApp(ContactsDemoV3());
 
-class ContactsDemoV2 extends StatelessWidget {
+class ContactsDemoV3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
