@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'model/subway_arrival.dart';
 import 'api/subway_api.dart' as api;
-
 
 class MainPage extends StatefulWidget {
   @override
@@ -27,13 +27,34 @@ class MainPageState extends State<MainPage> {
       Card card = Card(
         child: Column(
           children: <Widget>[
-            Container(
-              width: 60,
-              height: 60,
-              child: Image.asset('images/subway.png'),
+            AspectRatio(
+              aspectRatio: 18 / 11,
+              child: Image.asset(
+                'assets/icon/subway.png',
+                fit: BoxFit.fitHeight,
+              ),
             ),
-            Text(info.trainLineNm),
-            Text(info.arvlMsg2),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      info.trainLineNm,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 4.0),
+                    Text(
+                      info.arvlMsg2,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       );
