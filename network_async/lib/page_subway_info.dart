@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -127,6 +126,7 @@ class MainPageState extends State<MainPage> {
           ? Center(child: CircularProgressIndicator())
           : Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
@@ -156,10 +156,9 @@ class MainPageState extends State<MainPage> {
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: <Widget>[
-                    Text('     도착 정보'),
-                  ],
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text('도착 정보'),
                 ),
                 SizedBox(
                   height: 10,

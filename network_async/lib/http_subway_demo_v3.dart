@@ -8,6 +8,7 @@ class SubwayDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '지하철 실시간 정보',
+      debugShowCheckedModeBanner: false,
       home: MainPage(),
     );
   }
