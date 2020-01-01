@@ -11,7 +11,7 @@ class MainPage extends StatelessWidget {
       body: Center(
         child: Consumer<SimpleState> (
           builder: (context, state, child) {
-            return Text('로그인 완료:  ${state.email}');
+            return Text('로그인 완료: ${state.email}');
           },
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'dart:io';
 
-import 'login_form_demo.dart';
+import 'login_form_demo_v2.dart';
 import 'state_simple.dart';
 
 class LoginPage extends StatefulWidget {
@@ -61,12 +61,14 @@ class LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
-                    child: Text('Log In'),
+                    key: Key('login'),
+                    child: Text('로그인'),
                     onPressed: () => _onLogin(context),
                   ),
                   SizedBox(width: 10.0),
                   RaisedButton(
-                    child: Text('Cancel'),
+                    key: Key('cancel'),
+                    child: Text('취소'),
                     onPressed: _onCancel,
                   ),
                 ],
