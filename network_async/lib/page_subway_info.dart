@@ -85,9 +85,9 @@ class MainPageState extends State<MainPage> {
     var json = jsonDecode(responseBody);
     Map<String, dynamic> errorMessage = json['errorMessage'];
 
-    if (errorMessage['status'] != api.STATUS_OK) {
+    if (errorMessage == null || errorMessage['status'] != api.STATUS_OK) {
       setState(() {
-        final String errMessage = errorMessage['message'];
+        final String errMessage = json['message'];
         print('error >> $errMessage');
         _data = const [];
         _isLoading = false;
