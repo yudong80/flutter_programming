@@ -8,7 +8,7 @@ import 'state_simple.dart';
 void main() => runApp(loginFormApp);
 
 var loginFormApp = ChangeNotifierProvider(
-  builder: (context) => SimpleState(),
+  create: (context) => SimpleState(),
   child: StateLoginDemo(),
 );
 
